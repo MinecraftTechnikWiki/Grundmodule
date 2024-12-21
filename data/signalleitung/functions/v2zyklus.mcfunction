@@ -1,5 +1,5 @@
 # Wenn der Spieler den Stock ausgewählt hat, wird ihm ein Etikett gegeben.
-tag @a[nbt={SelectedItem:{tag:{EigSigLe.2Stock:true} } }] add EtiSigLe.2Ausgewaehlt
+execute as @a if items entity @s weapon.* *[minecraft:custom_data~{EigSigLe.2Stock:true}] run tag @s add EtiSigLe.2Ausgewaehlt
 
 # Wenn der Spieler gerade den Stock ausgewählt hat, wird eine Partikelwolke erzeugt, falls sich unter dem spieler gelber Beton aufhält.
 execute at @a[tag=EtiSigLe.2Ausgewaehlt,tag=!EtiSigLe.2Auswahl] align xz if block ~0.5 ~-1 ~0.5 minecraft:yellow_concrete run summon minecraft:area_effect_cloud ~0.5 ~-1 ~0.5 {Duration:15,Tags:["EtiSigLe.2Alle","EtiSigLe.2Signal"]}

@@ -1,5 +1,5 @@
 # Wenn der Spieler den Stock ausgewählt hat, wird ihm ein Etikett gegeben.
-tag @a[nbt={SelectedItem:{tag:{EigSigLe.3Stock:true} } }] add EtiSigLe.3Ausgewaehlt
+execute as @a if items entity @s weapon.* *[minecraft:custom_data~{EigSigLe.3Stock:true}] run tag @s add EtiSigLe.3Ausgewaehlt
 
 # Wenn er den Stock gerade ausgewählt hat, wird unter ihm geprüft ob unter ihm gelber beton ist. Nur dann wird ein Markierer erzeugt.
 execute at @a[tag=EtiSigLe.3Ausgewaehlt,tag=!EtiSigLe.3Auswahl] align xz if block ~0.5 ~-1 ~0.5 minecraft:yellow_concrete run summon minecraft:marker ~0.5 ~-1 ~0.5 {Small:true,NoGravity:true,Marker:true,Invisible:true,Tags:["EtiSigLe.3Alle","EtiSigLe.3Signal"]}

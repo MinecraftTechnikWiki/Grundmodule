@@ -1,5 +1,5 @@
 # Es wird ein Etikett vergeben, wenn man den Rüstungsständer in der Schnellleiste ausgewählt hat.
-tag @a[nbt={SelectedItem:{tag:{EigSigEl.3Signal:true} } }] add EtiSigEl.3Ausgewaehlt
+execute as @a if items entity @s weapon.* *[minecraft:custom_data~{EigSigEl.3Signal:true}] run tag @s add EtiSigEl.3Ausgewaehlt
 
 # Wenn Spieler gerade den Rüstungsständer ausgewählt haben, wird eine Partikelwolke erzeugt, sofern ein Empfänger-Rüstungsständer in einem Umkreis von 30 Blöcken vorhanden ist.
 execute at @a[tag=EtiSigEl.3Ausgewaehlt,tag=!EtiSigEl.3Auswahl] if entity @e[distance=..30,type=minecraft:armor_stand,tag=EtiSigEl.3Empfaenger] run summon minecraft:area_effect_cloud ~ ~ ~ {Duration:2147483647,Tags:["EtiSigEl.3Alle","EtiSigEl.3Signal"]}
@@ -8,16 +8,16 @@ execute at @a[tag=EtiSigEl.3Ausgewaehlt,tag=!EtiSigEl.3Auswahl] if entity @e[dis
 tag @a[tag=EtiSigEl.3Ausgewaehlt,tag=!EtiSigEl.3Auswahl] add EtiSigEl.3Auswahl
 tag @a[tag=!EtiSigEl.3Ausgewaehlt,tag=EtiSigEl.3Auswahl] remove EtiSigEl.3Auswahl
 
-#Das Etikett wird wieder entfernt, damit es immer in dem Tick vorhanden ist, in dem der Rüstungsständer ausgewählt wurde.
+# Das Etikett wird wieder entfernt, damit es immer nur in dem Tick vorhanden ist, in dem der Rüstungsständer ausgewählt wurde.
 tag @a[tag=EtiSigEl.3Ausgewaehlt] remove EtiSigEl.3Ausgewaehlt
 
 # Die Partikelwolke bekommt ihren Wert um eins erhöht. Falls noch keinen Wert besitzt wird null angenommen.
 scoreboard players add @e[type=minecraft:area_effect_cloud,tag=EtiSigEl.3Signal] PZSigEl.3Wert 1
 
 # Je nach dem welchen Wert die Partikelwolke besitzt, werden die Partikel anders gefäbrt sein.
-execute at @e[type=minecraft:area_effect_cloud,tag=EtiSigEl.3Signal,scores={PZSigEl.3Wert=1..10}] run particle minecraft:block minecraft:yellow_concrete ~ ~ ~ 0 0 0 0.1 1 force @a[distance=..25]
-execute at @e[type=minecraft:area_effect_cloud,tag=EtiSigEl.3Signal,scores={PZSigEl.3Wert=11..20}] run particle minecraft:block minecraft:red_concrete ~ ~ ~ 0 0 0 0.1 1 force @a[distance=..25]
-execute at @e[type=minecraft:area_effect_cloud,tag=EtiSigEl.3Signal,scores={PZSigEl.3Wert=21..60}] run particle minecraft:block minecraft:purple_concrete ~ ~ ~ 0 0 0 0.1 1 force @a[distance=..25]
+execute at @e[type=minecraft:area_effect_cloud,tag=EtiSigEl.3Signal,scores={PZSigEl.3Wert=1..10}] run particle minecraft:block{block_state:{Name:"minecraft:yellow_concrete"} } ~ ~ ~ 0 0 0 0.1 1 force @a[distance=..25]
+execute at @e[type=minecraft:area_effect_cloud,tag=EtiSigEl.3Signal,scores={PZSigEl.3Wert=11..20}] run particle minecraft:block{block_state:{Name:"minecraft:red_concrete"} } ~ ~ ~ 0 0 0 0.1 1 force @a[distance=..25]
+execute at @e[type=minecraft:area_effect_cloud,tag=EtiSigEl.3Signal,scores={PZSigEl.3Wert=21..60}] run particle minecraft:block{block_state:{Name:"minecraft:purple_concrete"} } ~ ~ ~ 0 0 0 0.1 1 force @a[distance=..25]
 
 # Wenn ein Empfänger-Rüstungsständer irgend einen Wert über null besitzt, wird sein Wert um eins verringert.
 scoreboard players remove @e[type=minecraft:armor_stand,tag=EtiSigEl.3Empfaenger,scores={PZSigEl.3Wert=1..}] PZSigEl.3Wert 1
