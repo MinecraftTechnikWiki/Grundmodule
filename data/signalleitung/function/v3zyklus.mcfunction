@@ -1,13 +1,13 @@
 # Wenn der Spieler den Stock ausgewählt hat, wird ihm ein Etikett gegeben.
 execute as @a if items entity @s weapon.* *[minecraft:custom_data~{EigSigLe.3Stock:true}] run tag @s add EtiSigLe.3Ausgewaehlt
 
-# Wenn er den Stock gerade ausgewählt hat, wird unter ihm geprüft ob unter ihm gelber beton ist. Nur dann wird ein Markierer erzeugt.
-execute at @a[tag=EtiSigLe.3Ausgewaehlt,tag=!EtiSigLe.3Auswahl] align xz if block ~0.5 ~-1 ~0.5 minecraft:yellow_concrete run summon minecraft:marker ~0.5 ~-1 ~0.5 {Small:true,NoGravity:true,Marker:true,Invisible:true,Tags:["EtiSigLe.3Alle","EtiSigLe.3Signal"]}
+# Wenn er den Stock gerade ausgewählt hat, wird unter ihm geprüft ob unter ihm gelber Beton ist. Nur dann wird ein Markierer erzeugt.
+execute at @a[tag=EtiSigLe.3Ausgewaehlt,tag=!EtiSigLe.3Auswahl] align xz if block ~0.5 ~-1 ~0.5 minecraft:yellow_concrete run summon minecraft:marker ~0.5 ~-1 ~0.5 {Tags:["EtiSigLe.3Alle","EtiSigLe.3Signal"]}
 
 # Wenn er gerade nicht mehr den Stock ausgewählt hat, wird dem Markierer ein Etikett vergeben.
-execute at @a[tag=!EtiSigLe.3Ausgewaehlt,tag=EtiSigLe.3Auswahl] align xz positioned ~0.5 ~-1 ~0.5 run tag @e[distance=..0.5,type=minecraft:marker,tag=EtiSigLe.3Signal,sort=nearest,limit=1] add EtiSigLe.3Erloschen
+execute at @a[tag=!EtiSigLe.3Ausgewaehlt,tag=EtiSigLe.3Auswahl] align xz positioned ~0.5 ~-1 ~0.5 run tag @n[distance=..0.5,type=minecraft:marker,tag=EtiSigLe.3Signal] add EtiSigLe.3Erloschen
 
-# Je nach dem ob der Spieler den stock gerade ausgewählt hat oder nicht wird ein Etikett vergeben.
+# Je nach dem ob der Spieler den Stock gerade ausgewählt hat oder nicht wird ein Etikett vergeben.
 tag @a[tag=EtiSigLe.3Ausgewaehlt,tag=!EtiSigLe.3Auswahl] add EtiSigLe.3Auswahl
 tag @a[tag=!EtiSigLe.3Ausgewaehlt,tag=EtiSigLe.3Auswahl] remove EtiSigLe.3Auswahl
 
